@@ -1,0 +1,127 @@
+/* Unified 3D Cubes Color Scheme - Modern Professional */
+:root {
+  /* Primary Color Palette */
+  --cube-blue-primary: #3b82f6;
+  --cube-blue-secondary: #1d4ed8;
+  --cube-blue-accent: #60a5fa;
+  
+  --cube-purple-primary: #8b5cf6;
+  --cube-purple-secondary: #7c3aed;
+  --cube-purple-accent: #a855f7;
+  
+  --cube-cyan-primary: #06b6d4;
+  --cube-cyan-secondary: #0891b2;
+  --cube-cyan-accent: #22d3ee;
+  
+  --cube-indigo-primary: #6366f1;
+  --cube-indigo-secondary: #4f46e5;
+  --cube-indigo-accent: #818cf8;
+  
+  /* Glass-morphism effects */
+  --cube-glass-bg: rgba(255, 255, 255, 0.1);
+  --cube-glass-border: rgba(255, 255, 255, 0.2);
+  --cube-glass-shadow: rgba(0, 0, 0, 0.2);
+  
+  /* Animation timing */
+  --cube-float-duration: 10s;
+  --cube-rotate-duration: 25s;
+  --cube-pulse-duration: 2s;
+}
+
+/* Unified cube styling */
+.unified-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+  transition: all 0.3s ease;
+}
+
+.unified-cube-face {
+  position: absolute;
+  opacity: 0.85;
+  border: 1px solid var(--cube-glass-border);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 0 20px var(--cube-glass-shadow),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.unified-cube:hover {
+  filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.5));
+  transform: scale(1.05);
+}
+
+.unified-cube:hover .unified-cube-face {
+  opacity: 0.95;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .unified-cube {
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.2));
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-cube {
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.15));
+  }
+}
+
+/* Animation keyframes */
+@keyframes unifiedFloat {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) scale(1); 
+    opacity: 0.8; 
+  }
+  25% { 
+    transform: translateY(-30px) translateX(15px) scale(1.1); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: translateY(-20px) translateX(25px) scale(1.05); 
+    opacity: 0.9; 
+  }
+  75% { 
+    transform: translateY(-35px) translateX(10px) scale(1.15); 
+    opacity: 0.95; 
+  }
+}
+
+@keyframes unifiedRotate {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes unifiedPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Color scheme classes */
+.cube-blue {
+  --cube-primary: var(--cube-blue-primary);
+  --cube-secondary: var(--cube-blue-secondary);
+  --cube-accent: var(--cube-blue-accent);
+}
+
+.cube-purple {
+  --cube-primary: var(--cube-purple-primary);
+  --cube-secondary: var(--cube-purple-secondary);
+  --cube-accent: var(--cube-purple-accent);
+}
+
+.cube-cyan {
+  --cube-primary: var(--cube-cyan-primary);
+  --cube-secondary: var(--cube-cyan-secondary);
+  --cube-accent: var(--cube-cyan-accent);
+}
+
+.cube-indigo {
+  --cube-primary: var(--cube-indigo-primary);
+  --cube-secondary: var(--cube-indigo-secondary);
+  --cube-accent: var(--cube-indigo-accent);
+}

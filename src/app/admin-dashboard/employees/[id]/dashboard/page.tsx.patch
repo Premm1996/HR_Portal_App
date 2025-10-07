@@ -1,0 +1,248 @@
+import { useParams, useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, FileText, Activity, User, Calendar, Mail, Phone, Building } from 'lucide-react';
+import AuthService from '@/lib/auth';
+
+=======
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, FileText, Activity, User, Calendar, Mail, Phone, Building } from 'lucide-react';
+import AuthService from '@/lib/auth';
+
+// New state variables for offer letter status update
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+  const authService = AuthService;
+  const [dashboardData, setDashboardData] = useState<EmployeeDashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  if (!params || !params.id) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Invalid Employee ID</h2>
+          <Button onClick={() => router.back()}>Go Back</Button>
+        </div>
+      </div>
+    );
+  }
+=======
+  const authService = AuthService;
+  const [dashboardData, setDashboardData] = useState<EmployeeDashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // New state for offer letter status update form
+  const [offerLetterStatus, setOfferLetterStatus] = useState<string>('');
+  const [offerLetterRemarks, setOfferLetterRemarks] = useState<string>('');
+  const [updatingOfferStatus, setUpdatingOfferStatus] = useState<boolean>(false);
+  const [offerStatusMessage, setOfferStatusMessage] = useState<string | null>(null);
+  const [offerStatusError, setOfferStatusError] = useState<string | null>(null);
+
+  if (!params || !params.id) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Invalid Employee ID</h2>
+          <Button onClick={() => router.back()}>Go Back</Button>
+        </div>
+      </div>
+    );
+  }
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+  const fetchEmployeeDashboard = async () => {
+    if (!id) return;
+
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/admin/employees/${id}/dashboard`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch employee dashboard');
+      }
+
+      const data = await response.json();
+      setDashboardData(data);
+
+      // Initialize offer letter status and remarks from documents if available
+      const offerLetterDoc = data.documents.find((doc: Document) => doc.type === 'signed_offer_letter');
+      if (offerLetterDoc) {
+        setOfferLetterStatus(offerLetterDoc.status);
+        setOfferLetterRemarks(offerLetterDoc.remarks || '');
+      } else {
+        setOfferLetterStatus('');
+        setOfferLetterRemarks('');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+=======
+  const fetchEmployeeDashboard = async () => {
+    if (!id) return;
+
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/admin/employees/${id}/dashboard`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch employee dashboard');
+      }
+
+      const data = await response.json();
+      setDashboardData(data);
+
+      // Initialize offer letter status and remarks from documents if available
+      const offerLetterDoc = data.documents.find((doc: Document) => doc.type === 'signed_offer_letter');
+      if (offerLetterDoc) {
+        setOfferLetterStatus(offerLetterDoc.status);
+        setOfferLetterRemarks(offerLetterDoc.remarks || '');
+      } else {
+        setOfferLetterStatus('');
+        setOfferLetterRemarks('');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handler for offer letter status update form submit
+  const handleOfferLetterStatusUpdate = async () => {
+    if (!offerLetterStatus) {
+      setOfferStatusError('Please select a status');
+      return;
+    }
+    setOfferStatusError(null);
+    setOfferStatusMessage(null);
+    setUpdatingOfferStatus(true);
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/admin/employees/${id}/offer/status`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          status: offerLetterStatus,
+          remarks: offerLetterRemarks,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update offer letter status');
+      }
+
+      setOfferStatusMessage('Offer letter status updated successfully');
+      // Refresh dashboard data to reflect changes
+      fetchEmployeeDashboard();
+    } catch (error) {
+      setOfferStatusError(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setUpdatingOfferStatus(false);
+    }
+  };
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+            <CardContent>
+              <div className="space-y-3">
+                {documents.length > 0 ? (
+                  documents.map((doc, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <p className="font-medium">{doc.name}</p>
+                        <p className="text-sm text-gray-600 capitalize">{doc.type.replace('_', ' ')}</p>
+                      </div>
+                      <Badge className={getDocumentStatusColor(doc.status)}>
+                        {doc.status}
+                      </Badge>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-600">No documents uploaded</p>
+                )}
+              </div>
+            </CardContent>
+=======
+            <CardContent>
+              <div className="space-y-3">
+                {documents.length > 0 ? (
+                  documents.map((doc, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <p className="font-medium">{doc.name}</p>
+                        <p className="text-sm text-gray-600 capitalize">{doc.type.replace('_', ' ')}</p>
+                      </div>
+                      <Badge className={getDocumentStatusColor(doc.status)}>
+                        {doc.status}
+                      </Badge>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-600">No documents uploaded</p>
+                )}
+              </div>
+
+              {/* Offer Letter Status Update Form */}
+              <div className="mt-6 p-4 border border-gray-300 rounded-lg bg-white">
+                <h3 className="text-lg font-semibold mb-4">Update Offer Letter Status</h3>
+                <div className="mb-4">
+                  <label className="block mb-1 font-medium">Status</label>
+                  <select
+                    value={offerLetterStatus}
+                    onChange={(e) => setOfferLetterStatus(e.target.value)}
+                    className="w-full border border-gray-300 rounded px-3 py-2"
+                  >
+                    <option value="">Select status</option>
+                    <option value="APPROVED">Approve</option>
+                    <option value="REJECTED">Reject</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block mb-1 font-medium">Remarks (optional)</label>
+                  <textarea
+                    value={offerLetterRemarks}
+                    onChange={(e) => setOfferLetterRemarks(e.target.value)}
+                    className="w-full border border-gray-300 rounded px-3 py-2"
+                    rows={4}
+                    placeholder="Enter remarks here"
+                  />
+                </div>
+                {offerStatusError && (
+                  <p className="text-red-600 mb-2">{offerStatusError}</p>
+                )}
+                {offerStatusMessage && (
+                  <p className="text-green-600 mb-2">{offerStatusMessage}</p>
+                )}
+                <Button
+                  onClick={handleOfferLetterStatusUpdate}
+                  disabled={updatingOfferStatus}
+                >
+                  {updatingOfferStatus ? 'Updating...' : 'Update Status'}
+                </Button>
+              </div>
+            </CardContent>

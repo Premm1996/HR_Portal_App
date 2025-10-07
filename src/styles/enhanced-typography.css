@@ -1,0 +1,140 @@
+/* Enhanced Typography for Homepage Text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Professional Font Classes */
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-modern {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Enhanced Text Effects */
+.text-metallic {
+  background: linear-gradient(135deg, #c0c0c0 0%, #ffffff 50%, #c0c0c0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.text-3d {
+  text-shadow: 
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2),
+    0 20px 20px rgba(0,0,0,.15);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Homepage Text Styling */
+.homepage-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.homepage-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.homepage-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 5rem);
+  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.homepage-portal {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  background: linear-gradient(135deg, #3b82f6, #06b6d4, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .homepage-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .homepage-brand {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+  
+  .homepage-portal {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
